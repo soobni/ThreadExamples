@@ -10,7 +10,7 @@ public class SumMultipleThreads implements Runnable{
 
 		long to = 10000000;
 		ArrayList<SumMultipleThreads> sumRunners = new ArrayList<SumMultipleThreads>();
-		//ArrayList<SumMultipleThreads> toRuns = new ArrayList<SumMultipleThreads>();
+		Thread thread1 = new Thread();		
 		/* Let a thread compute a sub-sum.
 		 * sumRunners.add(new SumMultipleThreads(1,1000000));
 		 * sumRunners.add(new SumMultipleThreads(1000001,2000000));
@@ -33,11 +33,14 @@ public class SumMultipleThreads implements Runnable{
 			Thread thread = new Thread(runner);
 			
 			thread.start();
-			try {thread.join();
-	         }catch(Exception e) {
-	         }
+
 			threadsForSubSum.add(thread);
+			thread1=thread;
 		}
+		
+		try {thread1.join();
+        }catch(Exception e) {
+        }
 
 		long grandTotal = 0;
 		for(SumMultipleThreads runner:sumRunners) {
